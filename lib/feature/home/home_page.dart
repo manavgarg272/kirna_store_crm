@@ -6,6 +6,7 @@ import 'package:kirana_store_crm/feature/add_products/presentation/add_product.d
 import 'package:kirana_store_crm/feature/home/home_dawer.dart';
 import 'package:kirana_store_crm/feature/home/home_screen.dart';
 import 'package:kirana_store_crm/feature/home/manager/drawer_notifer.dart';
+import 'package:kirana_store_crm/feature/order_list/presentation/order_list.dart';
 import 'package:kirana_store_crm/feature/sub_category/presentation/add_subcategory.dart';
 import 'package:kirana_store_crm/feature/sub_category/presentation/manager/get_sub_category_notifier.dart';
 import 'package:provider/provider.dart';
@@ -61,13 +62,12 @@ Widget getDrawerScreen(int indexScreen){
 
   switch (indexScreen) {
     case 3:
-      return AddCategoryPage();
+      return const AddCategoryPage();
     case 1:
-      return AddProductList();
-    case 2:
-      return AddProductList();
-
+      return const AddProductList();
+    case 4:
+      return const SubCategoryData();
     default:
-      return SubCategoryData();
+      return OrderListPlaced();
   }
 }

@@ -64,6 +64,15 @@ class DrawerScreenWidget extends StatelessWidget {
             Navigator.of(context).pop();
             context.read<DrawerNotifier>().drawerIndex = 3;
           }),
+          ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text(
+              'Add Sub Categories',
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              context.read<DrawerNotifier>().drawerIndex = 4;
+            }),
       ListTile(
           leading: const Icon(Icons.home),
           title: const Text(
@@ -71,7 +80,6 @@ class DrawerScreenWidget extends StatelessWidget {
           ),
           onTap: () {
             Navigator.of(context).pop();
-            context.read<DrawerNotifier>().drawerIndex = 4;
           }),
       ListTile(
           leading: const Icon(Icons.home),
@@ -80,7 +88,7 @@ class DrawerScreenWidget extends StatelessWidget {
           ),
           onTap: () {
             Navigator.of(context).pop();
-            context.read<DrawerNotifier>().drawerIndex = 5;
+            context.read<DrawerNotifier>().drawerIndex = 0;
           }),
     ]));
   }

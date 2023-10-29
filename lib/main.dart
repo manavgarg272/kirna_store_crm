@@ -5,6 +5,8 @@ import 'package:kirana_store_crm/feature/add_category/presentation/manager/get_a
 import 'package:kirana_store_crm/feature/add_products/presentation/manager/add_product_notifier.dart';
 import 'package:kirana_store_crm/feature/home/home_page.dart';
 import 'package:kirana_store_crm/feature/home/manager/drawer_notifer.dart';
+import 'package:kirana_store_crm/feature/order_list/presentation/manager/order_list_manager.dart';
+import 'package:kirana_store_crm/feature/order_list/presentation/manager/user_location_manager.dart';
 import 'package:kirana_store_crm/feature/sub_category/presentation/manager/get_sub_category_notifier.dart';
 import 'package:kirana_store_crm/feature/sub_category/presentation/manager/sub_category_notifier.dart';
 import 'package:kirana_store_crm/firebase_options.dart';
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AddProductNotifer()),
         ChangeNotifierProvider(create: (_) => SubCategoryNotifier()),
         ChangeNotifierProvider(create: (_) => GetSubCategoryNotifier()),
+        ChangeNotifierProvider(create: (_) => OrderListManagerNotifier()),
+        ChangeNotifierProvider(create: (_) => UserLocationManagerNotifier()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

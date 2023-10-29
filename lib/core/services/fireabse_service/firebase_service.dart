@@ -8,7 +8,6 @@ import 'package:flutter/foundation.dart';
 
 import 'package:image_picker/image_picker.dart';
 
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class FirestoreDatabase {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -31,6 +30,49 @@ class FirestoreDatabase {
     }
   }
 
+
+  Future<QuerySnapshot?> readDataFromCollectionWithFilterEqualAndEqual(
+    String collectionName, String fieldName1,  String filterName1,String fieldName2, String filterName2 ) async {
+  try {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection(collectionName)
+        .where(fieldName1, isEqualTo: filterName1)
+        .where(fieldName2, isEqualTo: filterName2) // Add the second filter condition
+        .get();
+    return querySnapshot;
+  } catch (e) {
+    print("Error reading data: $e");
+    return null;
+  }
+  }
+  
+  Future<bool> updateFieldValue(String collectionName, String  documentId ,String filedName, String updateValue )async {
+    try {
+      await _firestore.collection(collectionName).doc(documentId).update({
+        filedName: updateValue,
+      });
+      return true;
+    } catch (e) {
+      print("Error reading data: $e");
+      return false;
+    }
+  }
+  Future<QuerySnapshot?> readDataFromCollectionWithFilterEqual(
+    String collectionName, String fieldName,  String filterName) async {
+  try {
+    QuerySnapshot querySnapshot  =
+        await _firestore.collection(collectionName).where(fieldName, isEqualTo: filterName)
+        .get();
+  
+    return querySnapshot;
+  } catch (e) {
+    print("Error reading data: $e");
+    return null;
+  }
+  }
+  
+  
+  
   Future<QuerySnapshot?> readDataFromCollection(
     String collectionName) async {
   try {
@@ -53,6 +95,7 @@ class FirestoreDatabase {
       print("Error writing data: $e");
     }
   }
+
 
   Future<void> writeDataWithDocName(
     String collectionName, Map<String, dynamic> data, String document) async {

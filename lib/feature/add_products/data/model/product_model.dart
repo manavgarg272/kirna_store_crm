@@ -7,7 +7,10 @@ class ProductModel {
   String subCategoryId;
   String productDescription; // Fixed the typo in variable name
   String categoryId;
-  ProductModel({
+
+  ProductModel(
+ 
+    {
     required this.productName,
     required this.productQuantity,
     required this.productQuatityLeft,
@@ -16,10 +19,12 @@ class ProductModel {
     required this.productDescription, // Fixed the variable name
     required this.categoryId, 
     required this.productPrice
+
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> map) {
     return ProductModel(
+
       productName: map["productName"] ?? "", // Corrected the JSON keys
       productQuantity: map["productQuantity"] ??0, // Corrected the JSON keys
       productQuatityLeft: map["productQuatityLeft"] ?? "", // Corrected the JSON keys
