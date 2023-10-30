@@ -148,7 +148,7 @@ class _AddProductListState extends State<AddProductList> {
                     imageListUrl.add(imageFilLink);
                   },
                 ),
-                ImagePickerWidget(
+                /* ImagePickerWidget(
                   callback: (String imageFilLink) {
                     imageListUrl.add(imageFilLink);
                   },
@@ -162,13 +162,13 @@ class _AddProductListState extends State<AddProductList> {
                   callback: (String imageFilLink) {
                     imageListUrl.add(imageFilLink);
                   },
-                ),
+                ), */
               ],
             ),
             OutlinedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate() &&
-                      imageListUrl.length >= 4) {
+                      imageListUrl.length >= 1) {
                     await context.read<AddProductNotifer>().addProductsToData(
                         product: ProductModel(
                             productName: productNameController!.text,
@@ -204,6 +204,8 @@ class _AddProductListState extends State<AddProductList> {
                   }
                 },
                 child: Text("Add Product")),
+
+              SizedBox(height: 10,)
           ],
         ),
       ),

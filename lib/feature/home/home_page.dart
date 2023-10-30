@@ -67,7 +67,9 @@ Widget getDrawerScreen(int indexScreen){
       return const AddProductList();
     case 4:
       return const SubCategoryData();
+    case 6:
+    return const OrderListPlaced();
     default:
-      return OrderListPlaced();
+      return Container();
   }
 }

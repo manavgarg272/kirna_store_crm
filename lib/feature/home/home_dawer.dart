@@ -79,6 +79,7 @@ class DrawerScreenWidget extends StatelessWidget {
             'Banner Update',
           ),
           onTap: () {
+            context.read<DrawerNotifier>().drawerIndex = 5;
             Navigator.of(context).pop();
           }),
       ListTile(
@@ -88,7 +89,7 @@ class DrawerScreenWidget extends StatelessWidget {
           ),
           onTap: () {
             Navigator.of(context).pop();
-            context.read<DrawerNotifier>().drawerIndex = 0;
+            context.read<DrawerNotifier>().drawerIndex = 6;
           }),
     ]));
   }
