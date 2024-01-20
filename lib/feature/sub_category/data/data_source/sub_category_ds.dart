@@ -5,6 +5,9 @@ import 'package:kirana_store_crm/feature/sub_category/data/model/sub_category_mo
 abstract class SubCategoryDs {
   Future<void> subcategoryRepoDs({required SubCategoryModel subCategoryRepo});
   Future<List<SubCategoryModel>> getAllSubCategoryDs();
+
+  Future<List<SubCategoryModel>> getAllSubCategoryByCategoryByDs(
+      {required String? categoryId});
 }
 
 class SubCategoryDsImpl extends SubCategoryDs {
@@ -19,23 +22,41 @@ class SubCategoryDsImpl extends SubCategoryDs {
       print("sucategoryrepo $e");
     }
   }
-  
+
   @override
   Future<List<SubCategoryModel>> getAllSubCategoryDs() async {
-
     List<SubCategoryModel> subCategoryList = [];
     try {
       FirestoreDatabase db = FirestoreDatabase();
-      QuerySnapshot? querySnapshot = await db.readDataFromCollection('SubCategoryData');
+      QuerySnapshot? querySnapshot =
+          await db.readDataFromCollection('SubCategoryData');
       for (var doc in querySnapshot!.docs) {
         var categoryData = doc.data() as Map<String, dynamic>;
         subCategoryList.add(SubCategoryModel.fromJson(categoryData));
       }
-  
     } catch (e) {
       print("sucategoryrepo $e");
     }
 
+    return subCategoryList;
+  }
+
+  @override
+  Future<List<SubCategoryModel>> getAllSubCategoryByCategoryByDs(
+      {required String? categoryId}) async {
+    List<SubCategoryModel> subCategoryList = [];
+    try {
+      FirestoreDatabase db = FirestoreDatabase();
+      QuerySnapshot? querySnapshot =
+          await db.readDataFromCollectionWithFilterEqual(
+              'SubCategoryData', 'categoryId', categoryId ?? "");
+      for (var doc in querySnapshot!.docs) {
+        var categoryData = doc.data() as Map<String, dynamic>;
+        subCategoryList.add(SubCategoryModel.fromJson(categoryData));
+      }
+    } catch (e) {
+      print("sucategoryrepo $e");
+    }
     return subCategoryList;
   }
 }

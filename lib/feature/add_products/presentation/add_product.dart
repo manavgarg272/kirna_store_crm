@@ -93,8 +93,18 @@ class _AddProductListState extends State<AddProductList> {
                   setState(() {
                     selectedItem = newValue ?? "";
                   });
+                  context
+                      .read<GetSubCategoryNotifier>()
+                      .subCategoryModel
+                      .clear();
+                  context
+                      .read<GetSubCategoryNotifier>()
+                      .getAllSubCategoryWithCategory(categoryId: newValue);
                 },
                 borderRadius: BorderRadius.circular(10),
+                /* onSaved: (newValue) {
+                 
+                }, */
                 decoration: InputDecoration(
                   labelText: 'Select an item', // You can customize the label
                   border: const OutlineInputBorder(
@@ -110,8 +120,15 @@ class _AddProductListState extends State<AddProductList> {
             Container(
               margin: EdgeInsets.all(size.height / 50),
               child: DropdownButtonFormField<SubCategoryModel>(
-                value:
-                    context.watch<GetSubCategoryNotifier>().subCategoryModel[0],
+                value: context
+                            .watch<GetSubCategoryNotifier>()
+                            .subCategoryModel
+                            .length ==
+                        0
+                    ? null
+                    : context
+                        .watch<GetSubCategoryNotifier>()
+                        .subCategoryModel[0],
                 items: context
                     .watch<GetSubCategoryNotifier>()
                     .subCategoryModel
@@ -148,27 +165,11 @@ class _AddProductListState extends State<AddProductList> {
                     imageListUrl.add(imageFilLink);
                   },
                 ),
-                /* ImagePickerWidget(
-                  callback: (String imageFilLink) {
-                    imageListUrl.add(imageFilLink);
-                  },
-                ),
-                ImagePickerWidget(
-                  callback: (String imageFilLink) {
-                    imageListUrl.add(imageFilLink);
-                  },
-                ),
-                ImagePickerWidget(
-                  callback: (String imageFilLink) {
-                    imageListUrl.add(imageFilLink);
-                  },
-                ), */
               ],
             ),
             OutlinedButton(
                 onPressed: () async {
-                  if (_formKey.currentState!.validate() &&
-                      imageListUrl.length >= 1) {
+                  if (_formKey.currentState!.validate()) {
                     await context.read<AddProductNotifer>().addProductsToData(
                         product: ProductModel(
                             productName: productNameController!.text,
@@ -177,7 +178,8 @@ class _AddProductListState extends State<AddProductList> {
                             productQuatityLeft:
                                 productQuantityLeftController!.text,
                             imagesList: imageListUrl,
-                            subCategoryId: selectedSubCategoryItem.subCategoryId,
+                            subCategoryId:
+                                selectedSubCategoryItem.subCategoryId,
                             categoryId: selectedItem,
                             productPrice:
                                 int.parse(productPriceController!.text),
@@ -204,8 +206,9 @@ class _AddProductListState extends State<AddProductList> {
                   }
                 },
                 child: Text("Add Product")),
-
-              SizedBox(height: 10,)
+            SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),

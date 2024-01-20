@@ -87,7 +87,6 @@ class _SubCategoryDataState extends State<SubCategoryData> {
           SizedBox(
             height: size.height / 30,
           ),
-          
           ImagePickerWidget(
             callback: (String imageFileLink) {
               setState(() {
@@ -98,8 +97,7 @@ class _SubCategoryDataState extends State<SubCategoryData> {
           OutlinedButton(
             onPressed: () async {
               if (_formKey.currentState!.validate() &&
-                  selectedSubItem.isNotEmpty &&
-                  subCategoryImageUrl.isNotEmpty) {
+                  selectedSubItem.isNotEmpty) {
                 try {
                   // Call the addSubCategoryData method and wait for the result
                   await context.read<SubCategoryNotifier>().addSubCategoryData(
